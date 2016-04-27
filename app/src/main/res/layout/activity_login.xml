@@ -40,7 +40,7 @@
 
             </android.support.design.widget.TextInputLayout>
 
-            <Button android:id="@+id/siginInButton" style="?android:textAppearanceSmall"
+            <Button android:id="@+id/googleSignInButton" style="?android:textAppearanceSmall"
                 android:layout_width="match_parent" android:layout_height="wrap_content"
                 android:layout_marginTop="16dp" android:text="Sign in"
                 android:textStyle="bold" />
