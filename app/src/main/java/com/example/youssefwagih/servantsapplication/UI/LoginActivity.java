@@ -7,9 +7,9 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.youssefwagih.servantsapplication.R;
-import com.firebase.client.AuthData;
+/*import com.firebase.client.AuthData;
 import com.firebase.client.Firebase;
-import com.firebase.client.FirebaseError;
+import com.firebase.client.FirebaseError;*/
 
 import java.util.Map;
 
@@ -18,9 +18,14 @@ import java.util.Map;
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends AppCompatActivity {
-    /* A reference to the Firebase */
+/*
+    */
+/* A reference to the Firebase *//*
+
     private Firebase mFirebaseRef;
-    /* Data from the authenticated user */
+    */
+/* Data from the authenticated user *//*
+
     private AuthData mAuthData;
 
     Button googleSignInButton;
@@ -31,7 +36,9 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        /* Firebase initialization */
+        */
+/* Firebase initialization *//*
+
         Firebase.setAndroidContext(this);
         mFirebaseRef = new Firebase(getResources().getString(R.string.firebase_url));
 
@@ -61,18 +68,22 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    /* ************************************
+    */
+/* ************************************
      *              PASSWORD              *
      **************************************
-     */
+     *//*
+
     public void loginWithPassword() {
         // mAuthProgressDialog.show();
         mFirebaseRef.authWithPassword("test@firebaseuser.com", "test1234", new AuthResultHandler("password"));
     }
 
-    /**
+    */
+/**
      * Utility class for authentication results
-     */
+     *//*
+
     private class AuthResultHandler implements Firebase.AuthResultHandler {
 
         private final String provider;
@@ -94,21 +105,29 @@ public class LoginActivity extends AppCompatActivity {
             //showErrorDialog(firebaseError.toString());
         }
 
-        /**
+        */
+/**
          * Once a user is logged in, take the mAuthData provided from Firebase and "use" it.
-         */
+         *//*
+
         private void setAuthenticatedUser(AuthData authData) {
             if (authData != null) {
-            /* Hide all the login buttons */
-                /*
+            */
+/* Hide all the login buttons *//*
+
+                */
+/*
                 mFacebookLoginButton.setVisibility(View.GONE);
                 mGoogleLoginButton.setVisibility(View.GONE);
                 mTwitterLoginButton.setVisibility(View.GONE);
                 mPasswordLoginButton.setVisibility(View.GONE);
                 mAnonymousLoginButton.setVisibility(View.GONE);
                 mLoggedInStatusTextView.setVisibility(View.VISIBLE);
-                */
-            /* show a provider specific status text */
+                *//*
+
+            */
+/* show a provider specific status text *//*
+
                 String name = null;
                 if (authData.getProvider().equals("facebook")
                         || authData.getProvider().equals("google")
@@ -125,22 +144,29 @@ public class LoginActivity extends AppCompatActivity {
                 }
             } else {
 
-            /* No authenticated user show all the login buttons */
-                /*
+            */
+/* No authenticated user show all the login buttons *//*
+
+                */
+/*
                 mFacebookLoginButton.setVisibility(View.VISIBLE);
                 mGoogleLoginButton.setVisibility(View.VISIBLE);
                 mTwitterLoginButton.setVisibility(View.VISIBLE);
                 mPasswordLoginButton.setVisibility(View.VISIBLE);
                 mAnonymousLoginButton.setVisibility(View.VISIBLE);
                 mLoggedInStatusTextView.setVisibility(View.GONE);
-                */
+                *//*
+
             }
             //this.mAuthData = authData;
-        /* invalidate options menu to hide/show the logout button */
+        */
+/* invalidate options menu to hide/show the logout button *//*
+
             supportInvalidateOptionsMenu();
         }
+*/
 
-    }
+//    }
 
 }
 
