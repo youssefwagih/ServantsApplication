@@ -1,6 +1,9 @@
 package com.example.youssefwagih.servantsapplication.UI;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -8,34 +11,49 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.example.youssefwagih.servantsapplication.Business.Student;
+import com.example.youssefwagih.servantsapplication.Business.SundaySchool;
 import com.example.youssefwagih.servantsapplication.Data.ServiceDatabase;
 import com.example.youssefwagih.servantsapplication.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class DisplayStudentsActivity extends AppCompatActivity {
     ListView studentsListView;
     Button addStudentButton;
     ArrayList<Student> studentsList;
+    private String TAG = DisplayStudentsActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_students);
+
         studentsListView = (ListView) findViewById(R.id.studentsListView);
         addStudentButton = (Button) findViewById(R.id.addStudentButton);
 
-        final ServiceDatabase serviceDatabase = new ServiceDatabase(this);
+        final SundaySchool sundaySchool = new SundaySchool(this);
         Log.i("DisplayStudentsActivity", "opening database");
-        serviceDatabase.addServant();
-        studentsList = serviceDatabase.getStudentsByServantID(1);
+        List<Student> studentList = sundaySchool.getAllStudents();
         Log.i("DisplayStudentsActivity", "got studentlist");
-        //Log.i("DisplayStudentsActivity", studentsList.get(0).getName());
-        ArrayAdapter<Student> studentsListAdapter = new ArrayAdapter<Student>(getApplicationContext(), R.layout.student_list_item_layout, studentsList);
-        studentsListView.setAdapter(studentsListAdapter);
 
         addStudentButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,7 +67,7 @@ public class DisplayStudentsActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Student selectedStudent = studentsList.get((int)id);
-                Intent intent = new Intent(DisplayStudentsActivity.this, StudentDetailActivity.class);
+                Intent intent = new Intent(DisplayStudentsActivity.this, StudentDetailsActivity.class);
                 intent.putExtra("ID",selectedStudent.getID());
                 intent.putExtra("Name", selectedStudent.getName());
                 intent.putExtra("Address", selectedStudent.getAddress());
@@ -63,5 +81,4 @@ public class DisplayStudentsActivity extends AppCompatActivity {
 
 
     }
-
 }

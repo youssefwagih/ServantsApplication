@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.os.AsyncTask;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -36,7 +35,7 @@ public class LoginActivity extends AppCompatActivity implements
     GoogleApiClient.ConnectionCallbacks,
     GoogleApiClient.OnConnectionFailedListener {
 
-        private static final String TAG = MainActivity.class.getSimpleName();
+        private static final String TAG = DisplayStudentsActivity.class.getSimpleName();
         private TextView mLoggedInStatusTextView;
         private ProgressDialog mAuthProgressDialog;
         private Firebase mFirebaseRef;
@@ -66,7 +65,9 @@ public class LoginActivity extends AppCompatActivity implements
                         if (mGoogleConnectionResult != null) {
                             resolveSignInError();
                         } else if (mGoogleApiClient.isConnected()) {
-                            getGoogleOAuthTokenAndLogin();
+                            //getGoogleOAuthTokenAndLogin();
+                            Intent intent = new Intent(LoginActivity.this, DisplayStudentsActivity.class);
+                            startActivity(intent);
                         } else {
                     /* connect API now */
                             Log.d(TAG, "Trying to connect to Google API");
@@ -212,6 +213,8 @@ public class LoginActivity extends AppCompatActivity implements
             } else {
                 // if the provider is not twitter, we just need to pass in the oauth_token
                 mFirebaseRef.authWithOAuthToken(provider, options.get("oauth_token"), new AuthResultHandler(provider));
+                Intent intent = new Intent(this, DisplayStudentsActivity.class);
+                startActivity(intent);
             }
         }
     }
@@ -309,9 +312,12 @@ public class LoginActivity extends AppCompatActivity implements
         }
     }
 
+/*
     private void getGoogleOAuthTokenAndLogin() {
         mAuthProgressDialog.show();
-        /* Get OAuth token in Background */
+        */
+/* Get OAuth token in Background *//*
+
         AsyncTask<Void, Void, String> task = new AsyncTask<Void, Void, String>() {
             String errorMessage = null;
 
@@ -323,20 +329,26 @@ public class LoginActivity extends AppCompatActivity implements
                     String scope = String.format("oauth2:%s", Scopes.PLUS_LOGIN);
                     token = GoogleAuthUtil.getToken(LoginActivity.this, Plus.AccountApi.getAccountName(mGoogleApiClient), scope);
                 } catch (IOException transientEx) {
-                    /* Network or server error */
+                    */
+/* Network or server error *//*
+
                     Log.e(TAG, "Error authenticating with Google: " + transientEx);
                     errorMessage = "Network error: " + transientEx.getMessage();
                 } catch (UserRecoverableAuthException e) {
                     Log.w(TAG, "Recoverable Google OAuth error: " + e.toString());
-                    /* We probably need to ask for permissions, so start the intent if there is none pending */
+                    */
+/* We probably need to ask for permissions, so start the intent if there is none pending *//*
+
                     if (!mGoogleIntentInProgress) {
                         mGoogleIntentInProgress = true;
                         Intent recover = e.getIntent();
                         startActivityForResult(recover, RC_GOOGLE_LOGIN);
                     }
                 } catch (GoogleAuthException authEx) {
-                    /* The call is not ever expected to succeed assuming you have already verified that
-                     * Google Play services is installed. */
+                    */
+/* The call is not ever expected to succeed assuming you have already verified that
+                     * Google Play services is installed. *//*
+
                     Log.e(TAG, "Error authenticating with Google: " + authEx.getMessage(), authEx);
                     errorMessage = "Error authenticating with Google: " + authEx.getMessage();
                 }
@@ -347,7 +359,9 @@ public class LoginActivity extends AppCompatActivity implements
             protected void onPostExecute(String token) {
                 mGoogleLoginClicked = false;
                 if (token != null) {
-                    /* Successfully got OAuth token, now login with Google */
+                    */
+/* Successfully got OAuth token, now login with Google *//*
+
                     mFirebaseRef.authWithOAuthToken("google", token, new AuthResultHandler("google"));
                 } else if (errorMessage != null) {
                     mAuthProgressDialog.hide();
@@ -357,11 +371,12 @@ public class LoginActivity extends AppCompatActivity implements
         };
         task.execute();
     }
+*/
 
     @Override
     public void onConnected(final Bundle bundle) {
         /* Connected with Google API, use this to authenticate with Firebase */
-        getGoogleOAuthTokenAndLogin();
+        //getGoogleOAuthTokenAndLogin();
     }
 
 
@@ -393,6 +408,8 @@ public class LoginActivity extends AppCompatActivity implements
     public void loginWithPassword() {
         mAuthProgressDialog.show();
         mFirebaseRef.authWithPassword("test@firebaseuser.com", "test1234", new AuthResultHandler("password"));
+        Intent intent = new Intent(this, DisplayStudentsActivity.class);
+        startActivity(intent);
     }
 
     /* ************************************

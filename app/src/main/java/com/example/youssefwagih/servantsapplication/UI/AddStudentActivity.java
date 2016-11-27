@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.youssefwagih.servantsapplication.Business.Student;
-import com.example.youssefwagih.servantsapplication.Data.ServiceDatabase;
+import com.example.youssefwagih.servantsapplication.Business.SundaySchool;
 import com.example.youssefwagih.servantsapplication.R;
 import com.google.android.gms.maps.model.LatLng;
 
@@ -25,7 +25,7 @@ public class AddStudentActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_child);
+        setContentView(R.layout.activity_add_student);
         selectLocationButton = (Button) findViewById(R.id.selectLocationButton);
         addStudentButton = (Button) findViewById(R.id.addStudentButton);
         emailEditText = (EditText) findViewById(R.id.emailEditText);
@@ -39,10 +39,8 @@ public class AddStudentActivity extends Activity {
                 // Add student
                 // Student student = new Student(nameEditText.getText().toString(),homeAddressEditText.getText().toString(), phoneNumberEditText.getText().toString(), selectedLocation,  emailEditText.getText().toString());
                 Student student = new Student(nameEditText.getText().toString(),homeAddressEditText.getText().toString(), phoneNumberEditText.getText().toString(), selectedLocation,  emailEditText.getText().toString());
-                ServiceDatabase serviceDatabase = new ServiceDatabase(getApplicationContext());
-                long newStudentID = serviceDatabase.addStudentByServantID(student, 1);
-                Log.d("Student added by ID: ", String.valueOf(newStudentID));
-
+                SundaySchool ss = new SundaySchool(getApplicationContext());
+                ss.addStudent(student);
                 // return to Display Activity
                 Intent intent = new Intent(AddStudentActivity.this, DisplayStudentsActivity.class);
                 startActivity(intent);
@@ -52,7 +50,7 @@ public class AddStudentActivity extends Activity {
         selectLocationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AddStudentActivity.this, MapsActivity.class);
+                Intent intent = new Intent(AddStudentActivity.this, EditStudentLocationMapActivity.class);
                 startActivityForResult(intent,1);
             }
         });

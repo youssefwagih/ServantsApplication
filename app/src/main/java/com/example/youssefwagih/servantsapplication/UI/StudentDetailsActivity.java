@@ -3,7 +3,6 @@ package com.example.youssefwagih.servantsapplication.UI;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -12,12 +11,10 @@ import com.example.youssefwagih.servantsapplication.Business.Student;
 import com.example.youssefwagih.servantsapplication.R;
 import com.google.android.gms.maps.model.LatLng;
 
-import org.w3c.dom.Text;
-
 /**
  * Created by youssef wagih on 1/20/2016.
  */
-public class StudentDetailActivity extends Activity {
+public class StudentDetailsActivity extends Activity {
     private Button displayLocationButton;
     private TextView nameTextView;
     private TextView addressTextView;
@@ -53,7 +50,7 @@ public class StudentDetailActivity extends Activity {
         displayLocationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(StudentDetailActivity.this, StudentLocationMapActivity.class);
+                Intent intent = new Intent(StudentDetailsActivity.this, StudentLocationMapActivity.class);
                 intent.putExtra("locationLat", student.getLocation().latitude);
                 intent.putExtra("locationLng", student.getLocation().longitude );
                 startActivity(intent);

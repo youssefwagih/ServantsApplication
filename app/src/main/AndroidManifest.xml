@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.youssefwagih.servantsapplication" >
+    package="com.example.youssefwagih.servantsapplication">
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
@@ -21,31 +21,19 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
-            android:name=".UI.MainActivity"
+            android:name=".UI.StudentDetailsActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
-        <activity
-            android:name=".UI.StudentDetailActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
-        <activity
-            android:name=".UI.EditChildrenActivity" >
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".UI.DisplayStudentsActivity"
             android:label="@string/title_activity_show_children"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".UI.LoginActivity"
-            android:label="@string/title_activity_login" >
-        </activity>
-        <activity
-            android:name=".UI.SplashActivity" >
+            android:label="@string/title_activity_login" />
+        <activity android:name=".UI.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -65,15 +53,10 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".UI.MapsActivity"
-            android:label="@string/title_activity_maps" >
-        </activity>
-        <activity android:name=".UI.SendMessageActivity" >
-        </activity>
-        <activity android:name=".UI.AddStudentActivity" >
-        </activity>
-        <activity android:name=".UI.StudentLocationMapActivity" >
-        </activity>
+            android:name=".UI.EditStudentLocationMapActivity"
+            android:label="@string/title_activity_maps" />
+        <activity android:name=".UI.AddStudentActivity" />
+        <activity android:name=".UI.StudentLocationMapActivity" />
     </application>
 
 </manifest>
